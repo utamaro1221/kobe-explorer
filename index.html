@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobe Explorer</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+<body id="body" class="font-normal">
+
+    <header id="main-header" style="display: none;">
+        <div class="header-controls" style="display: flex; width: 100%; justify-content: center; align-items: center; position: relative;">
+            <div class="controls">
+                <button class="top-controls-btn" onclick="setLang('en')">English</button>
+                <button class="top-controls-btn" onclick="setLang('ja-kanji')">漢字</button>
+                <button class="top-controls-btn" onclick="handleHiraClick()">ひらがな</button>
+                <button class="top-controls-btn" onclick="changeFontSize('normal')">標準</button>
+                <button class="top-controls-btn" onclick="changeFontSize('large')">大</button>
+                <button class="top-controls-btn" onclick="changeFontSize('xlarge')">特大</button>
+            </div>
+            <div class="settings-container" style="position: absolute; right: 20px;">
+                <button id="settings-toggle" class="top-controls-btn settings-toggle-btn" onclick="toggleSettingsMenu()">
+                    <img src="images/aikonn/gear.png" alt="" class="settings-icon">
+                </button>
+                <div id="settings-menu" class="settings-menu" style="display: none; position: absolute; top: calc(100% + 10px); right: 0; background: white; border: 2px solid #ddd; border-radius: 12px; padding: 10px; z-index: 10001; min-width: 200px;">
+                    <button id="settings-title-btn" class="settings-menu-btn" style="width: 100%; border: none; background: transparent; padding: 10px; text-align: left; cursor: pointer; font-weight: bold; border-bottom: 1px solid #eee;" onclick="goToTitle()"></button>
+                    <button id="settings-tutorial-btn" class="settings-menu-btn" style="width: 100%; border: none; background: transparent; padding: 10px; text-align: left; cursor: pointer; font-weight: bold; border-bottom: 1px solid #eee;" onclick="goToTutorialScreen()"></button>
+                    <button id="settings-tag-btn" class="settings-menu-btn" style="width: 100%; border: none; background: transparent; padding: 10px; text-align: left; cursor: pointer; font-weight: bold;" onclick="goToTagSelection()"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="landing-wrapper">
+        <div id="welcome-screen">
+            <div class="moving-bg">
+                <div class="float-item item1"></div>
+                <div class="float-item item2"></div>
+                <div class="float-item item3"></div>
+                <div class="float-item item4"></div>
+            </div>
+            <div class="welcome-content">
+                <h1 class="welcome-title">Kobe Explorer</h1>
+                <p class="welcome-sub">DISCOVER THE CITY</p>
+                <button class="start-btn" onclick="startExplorer()">START</button>
+            </div>
+            <div class="scroll-indicator fade-in-up" onclick="scrollToLp()">
+                <span id="lp-scroll-text"></span><br>↓
+            </div>
+        </div>
+
+        <div id="lp-content">
+            <section class="lp-section fade-in-up">
+                <div class="lp-text">
+                    <h2 id="lp-title1"></h2>
+                    <p id="lp-text1"></p>
+                </div>
+                <div class="lp-image">
+                    <img src="images/haiki/haikei1.jpg" alt="">
+                </div>
+            </section>
+            
+            <section class="lp-section fade-in-up">
+                <div class="lp-image">
+                    <img src="images/haiki/haikei3.jpg" alt="">
+                </div>
+                <div class="lp-text">
+                    <h2 id="lp-title2"></h2>
+                    <p id="lp-text2"></p>
+                </div>
+            </section>
+
+            <section class="lp-section fade-in-up" style="justify-content: center; text-align: center; padding-top: 40px;">
+                <button id="lp-start-btn" class="start-btn" onclick="startExplorer()">START</button>
+            </section>
+        </div>
+    </div>
+
+    <div id="app-container">
+        
+        <div id="prompt-screen" style="display: none;">
+            <div style="text-align: center;">
+                <h2 id="prompt-title" class="prompt-title"></h2>
+                <p id="prompt-sub" class="prompt-sub"></p>
+                <div class="prompt-actions">
+                    <button id="yes-btn" class="prompt-btn yes-btn" onclick="startTutorial()"></button>
+                    <button id="no-btn" class="prompt-btn no-btn" onclick="skipTutorial()"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tutorial-screen" style="display: none;">
+            <h2 id="tutorial-title" class="tutorial-title"></h2>
+            
+            <img src="images/setumei/setmei.png" alt="" class="tutorial-image" onerror="this.style.display='none'">
+            
+            <p id="tutorial-text" class="tutorial-text"></p>
+
+            <button id="tutorial-finish-btn" class="start-btn tutorial-finish-btn" onclick="finishTutorial()"></button>
+        </div>
+
+        <div id="tag-screen" style="display: none;">
+            <div style="text-align: center; width: 100%;">
+                <h2 id="tag-title" class="prompt-title"></h2>
+                <p id="tag-subtitle" class="prompt-sub"></p>
+                <div id="tag-buttons-container"></div>
+                <button id="tag-clear-btn" onclick="clearTags()"></button>
+                <br>
+                <button id="tag-submit-btn" onclick="processTags()" disabled></button>
+            </div>
+        </div>
+
+        <div id="favorite-screen" style="display: none;">
+            <div style="text-align: center; width: 100%;">
+                <h2 id="fav-title" class="prompt-title"></h2>
+                <p id="fav-subtitle" class="prompt-sub"></p>
+                <div id="favorite-grid"></div>
+                <br>
+                <button id="reselect-tags-btn" class="action-btn" onclick="goBackToTagsFromFav()"></button>
+            </div>
+        </div>
+
+        <div id="menu-screen" style="display: none;">
+            <div style="width: 100%; text-align: center;">
+                <div id="dynamic-menu-grid"></div>
+                <br>
+                <button id="fav-back-btn" class="action-btn" onclick="goToTags()"></button>
+            </div>
+        </div>
+
+        <div id="detail-screen" style="display: none; text-align: center;">
+            <h2 id="content-title"></h2>
+
+            <div id="carousel-container" class="swiper my-swiper" style="display: none; width: 100%; max-width: 600px; height: 350px; background: #000; border-radius: 15px; margin: 0 auto 20px auto; overflow: hidden; position: relative;">
+                <div class="swiper-wrapper" id="swiper-wrapper-dynamic"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev" style="color: #fff;"></div>
+                <div class="swiper-button-next" style="color: #fff;"></div>
+            </div>
+
+            <div id="content-text" style="max-width: 600px; margin: 0 auto 20px auto; text-align: left; padding: 0 15px;"></div>
+            
+            <div id="target-map" style="display: block; width: 100%; max-width: 600px; height: 350px; margin: 0 auto 20px auto; border-radius: 15px; background-color: #f0f0f0; z-index: 1;"></div>
+            
+            <div id="link-box" style="display: none; margin-bottom: 25px;">
+                <div id="site-links" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;"></div>
+            </div>
+
+            <div class="detail-bottom-actions" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                <button id="detail-back-btn" class="action-btn" onclick="hideDetail()"></button>
+                <button id="detail-tagback-btn" class="action-btn" onclick="goToTags()"></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bubble-container"></div>
+
+    <script src="https://unpkg.com/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,865 @@
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    color: #1a1a1a;
+    transition: font-size 0.3s;
+    text-align: center;
+}
+
+html { font-size: 100%; }
+body.font-normal { font-size: 16px !important; }
+body.font-large { font-size: 20px !important; }
+body.font-xlarge { font-size: 26px !important; }
+
+rt { visibility: hidden; }
+
+.show-ruby rt {
+    visibility: visible;
+    font-size: 0.6em;
+    color: #867d7d;
+}
+
+ruby {
+    ruby-align: center;
+    ruby-position: over;
+}
+
+#landing-wrapper {
+    width: 100%;
+    background-color: #001f3f;
+    position: relative;
+}
+
+#welcome-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #001f3f;
+    position: relative;
+    overflow: hidden;
+}
+
+.moving-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.welcome-content {
+    z-index: 2;
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+.welcome-sub {
+    font-size: 1.2rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 60px; /* 40pxから60pxに増やして間隔を広げました */
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+.start-btn, #tag-submit-btn, .tutorial-finish-btn, .yes-btn {
+    padding: 16px 48px;
+    background-color: #c04000 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    box-shadow: 0 8px 20px rgba(192, 64, 0, 0.4) !important;
+}
+
+.start-btn:hover, #tag-submit-btn:hover:not(:disabled), .tutorial-finish-btn:hover, .yes-btn:hover {
+    transform: translateY(-4px) scale(1.05) !important;
+    background-color: #d84b00 !important;
+    box-shadow: 0 12px 25px rgba(192, 64, 0, 0.6) !important;
+}
+
+.float-item {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.item1 {
+    width: 35vw; height: 35vw;
+    top: -10%; left: -5%;
+    background-image: url('images/haiki/haikei4.jpg');
+    animation: floatA 15s ease-in-out infinite alternate;
+}
+
+.item2 {
+    width: 30vw; height: 30vw;
+    bottom: -5%; right: -5%;
+    background-image: url('images/haiki/haikei3.jpg');
+    animation: floatB 18s ease-in-out infinite alternate;
+}
+
+.item3 {
+    width: 20vw; height: 20vw;
+    top: 15%; right: 10%;
+    background-image: url('images/haiki/haikei1.jpg');
+    animation: floatA 20s ease-in-out infinite alternate-reverse;
+}
+
+.item4 {
+    width: 25vw; height: 25vw;
+    bottom: 10%; left: 15%;
+    background-image: url('images/haiki/haikei2.jpg');
+    animation: floatB 16s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatA {
+    0% { transform: translate(0px, 0px) rotate(0deg); }
+    100% { transform: translate(30px, 40px) rotate(10deg); }
+}
+
+@keyframes floatB {
+    0% { transform: translate(0px, 0px) scale(1); }
+    100% { transform: translate(-40px, -20px) scale(1.05); }
+}
+
+#lp-content {
+    width: 100%;
+    padding-bottom: 80px;
+}
+
+.lp-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.lp-section:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.lp-text {
+    flex: 1;
+    text-align: left;
+}
+
+.lp-text h2 {
+    font-size: 2.8rem;
+    color: #ffffff;
+    margin: 0 0 24px 0;
+    font-weight: 900;
+    line-height: 1.4;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.lp-text p {
+    font-size: 1.15rem;
+    color: #ffffff;
+    line-height: 2.2;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.lp-image {
+    flex: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.lp-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.lp-image:hover img {
+    transform: scale(1.05);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 0;           /* left: 50% を left: 0 に変更 */
+    right: 0;          /* right: 0 を追加 */
+    margin: 0 auto;    /* これで左右中央に固定されます */
+    width: fit-content;/* 文字幅に合わせる */
+    text-align: center;
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    z-index: 10;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -15px); }
+    60% { transform: translate(-50%, -7px); }
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 10px 20px;
+    height: 70px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    border-bottom: 2px solid #eeeeee;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.top-controls-btn {
+    padding: 10px 18px;
+    margin: 0 4px;
+    min-width: 82px;
+    background: #ffffff;
+    border: 2px solid #dddddd;
+    color: #555555;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.top-controls-btn:hover {
+    background: #f5f5f5;
+    color: #1a1a1a;
+    border-color: #cccccc;
+}
+
+.settings-toggle-btn {
+    min-width: auto;
+    padding: 8px;
+}
+
+.settings-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+    /* 反転の強度を調整する場合、brightness(0) invert(1) などにすると黒っぽくできます */
+    filter: invert(1) brightness(0); 
+}
+#app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#prompt-screen, #tutorial-screen, #tag-screen, #favorite-screen, #menu-screen {
+    display: none;
+    min-height: calc(100vh - 70px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    box-sizing: border-box;
+}
+
+#detail-screen {
+    display: none;
+    min-height: calc(100vh - 70px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 0 40px 0;
+    box-sizing: border-box;
+}
+
+.prompt-title {
+    font-size: 2.2em;
+    font-weight: 900;
+    color: #001f3f;
+    margin-bottom: 15px;
+}
+
+.prompt-sub {
+    font-size: 1.2em;
+    color: #555555;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.prompt-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.prompt-btn {
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.125em;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    width: 100%;
+    max-width: 350px;
+}
+
+.no-btn {
+    background-color: #ffffff;
+    color: #001f3f;
+    border: 2px solid #dddddd;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.no-btn:hover {
+    background-color: #f1f5f9;
+    border-color: #cccccc;
+    transform: translateY(-2px);
+}
+
+.tutorial-title {
+    font-size: 2em;
+    font-weight: 900;
+    color: #001f3f;
+    margin-bottom: 24px;
+}
+
+.tutorial-image {
+    width: 100%;
+    max-width: 750px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+}
+
+.tutorial-text {
+    font-size: 1.125em;
+    line-height: 2.0;
+    color: #444444;
+    text-align: left;
+    max-width: 750px;
+    margin: 0 auto 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+#tag-buttons-container, #favorite-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    max-width: 800px !important;
+    margin: 0 auto 30px auto !important;
+}
+
+#dynamic-menu-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(100px, 260px)) !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    max-width: 900px !important;
+    margin: 20px auto 30px auto !important;
+}
+
+.tag-btn {
+    flex: 0 1 calc(33.333% - 20px) !important;
+    min-width: 180px !important;
+    height: 180px !important;
+    background-color: #001f3f;
+    background-size: cover !important;
+    background-position: center !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 20px !important;
+    font-size: 1.25em !important; 
+    font-weight: 900 !important;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.tag-btn:hover {
+    transform: translateY(-8px) scale(1.03) !important;
+    box-shadow: 0 20px 35px rgba(0,31,63,0.4) !important;
+}
+
+.tag-btn.active {
+    box-shadow: 0 0 0 4px #c04000, 0 15px 30px rgba(192,64,0,0.4) !important;
+    transform: translateY(-5px) !important;
+}
+
+/* カード内のアイコン設定 */
+.tag-icon {
+    /* アイコンをダークグレーにし、外側に白い光彩（発光）を加える設定 */
+    filter: brightness(0) invert(0.9) drop-shadow(0 0 4px rgba(255, 255, 255, 1));
+    width: 45px;
+    height: 45px;
+    margin-bottom: 12px;
+}
+
+/* メニュー画面のアイコン用 */
+.menu-tag-label .tag-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 0;
+    /* 白い背景上のアイコンなので、ここは元の黒を活かす */
+    filter: none;
+}
+
+/* 文字の視認性を劇的に上げる設定 */
+.tag-btn span, .menu-btn span {
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.8) !important;
+    font-weight: 900 !important;
+}
+
+/* カード全体の質感を上げる */
+.tag-btn, .menu-btn {
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+#tag-clear-btn {
+    padding: 8px 16px;
+    font-size: 1em;
+    background: transparent;
+    color: #555555;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#tag-submit-btn:disabled {
+    background: #e2e8f0 !important;
+    color: #94a3b8 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.menu-btn {
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    height: 220px; 
+    font-size: 1.3em; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    font-weight: 900;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+    padding: 20px;
+    overflow: hidden;
+}
+
+.menu-btn:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 35px rgba(0,31,63,0.4);
+}
+
+.menu-tag-label {
+    font-size: 0.7em; 
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #001f3f;
+    padding: 8px 18px;
+    border-radius: 30px;
+    text-shadow: none;
+    font-weight: 900;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-tag-label .tag-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 0;
+    filter: none;
+}
+
+.sortable-ghost { 
+    opacity: 0.2;
+    transform: scale(0.95);
+    background-color: #e2e8f0;
+}
+
+.sortable-fallback {
+    opacity: 0.9 !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3) !important;
+    z-index: 9999 !important;
+    transform: scale(1.05) rotate(4deg) !important;
+    cursor: grabbing !important;
+}
+
+#detail-image-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#detail-image-carousel::-webkit-scrollbar { display: none; }
+
+.detail-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+#detail-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.detail-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #cbd5e1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.detail-dot.active {
+    background-color: #c04000;
+    transform: scale(1.2);
+}
+
+#content-title {
+    font-size: 28px;
+    margin: 0 0 24px 0;
+    line-height: 1.8;
+    color: #001f3f;
+    font-weight: 900;
+}
+
+#content-text {
+    font-size: 16px;
+    text-align: left;
+    margin: 0 auto 24px auto;
+    padding: 0 16px;
+    line-height: 1.8;
+    color: #444444;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.action-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 32px;
+    height: 54px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #001f3f;
+    border-radius: 30px;
+    border: 2px solid #dddddd;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-weight: 900;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.action-btn:hover {
+    background-color: #f8fafc;
+    border-color: #cccccc;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+#bubble-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -150px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floatUp linear forwards;
+}
+
+.bubble img {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
+.tag-icon {
+    filter: brightness(0);
+}
+.my-swiper {
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    border-radius: 15px;
+    margin: 0 auto 20px auto !important;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .header-controls {
+        flex-direction: row;
+    }
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding-right: 40px;
+    }
+    .settings-container {
+        position: absolute !important;
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+    .lp-section, .lp-section:nth-child(even) {
+        flex-direction: column;
+        padding: 50px 20px;
+        gap: 30px;
+    }
+    .lp-image {
+        order: 1;
+        width: 100%;
+    }
+    .lp-text {
+        order: 2;
+        text-align: left;
+    }
+    .lp-text h2 {
+        font-size: 1.8rem;
+        text-align: left;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+    .lp-text p {
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+    #dynamic-menu-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        height: auto;
+        padding: 10px;
+        min-height: 60px;
+    }
+    .top-controls-btn {
+        padding: 6px 10px;
+        min-width: auto;
+        font-size: 12px;
+        margin: 0;
+    }
+    .item1 {
+        width: 55vw; height: 55vw;
+        top: -5%; left: -10%;
+    }
+    .item2 {
+        width: 45vw; height: 45vw;
+        bottom: 5%; right: -10%;
+    }
+    .item3 {
+        width: 35vw; height: 35vw;
+        top: 15%; right: -5%;
+    }
+    .item4 {
+        width: 40vw; height: 40vw;
+        bottom: 15%; left: -5%;
+    }
+    .welcome-title {
+        font-size: 2.5rem;
+        margin-top: 20px;
+    }
+    .welcome-sub {
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+        letter-spacing: 0.2em;
+    }
+    .start-btn, #tag-submit-btn, .tutorial-finish-btn, .yes-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    .scroll-indicator {
+        bottom: 15px;
+    }
+    .prompt-title, #content-title, #tag-title, #fav-title {
+        font-size: 1.5em !important;
+    }
+    .prompt-sub {
+        font-size: 1em;
+    }
+    #tag-buttons-container, #favorite-grid {
+        gap: 10px !important;
+    }
+    .tag-btn {
+        flex: 0 1 calc(50% - 10px) !important;
+        height: 120px !important;
+        padding: 8px !important;
+    }
+    .tag-btn span {
+        font-size: 0.85em !important;
+    }
+    .tag-icon {
+        width: 28px !important;
+        height: 28px !important;
+        margin-bottom: 8px !important;
+    }
+    .menu-btn {
+        height: 140px;
+        font-size: 1em;
+        padding: 10px;
+    }
+    .menu-tag-label {
+        font-size: 0.6em;
+        padding: 5px 10px;
+        margin-bottom: 8px;
+    }
+    .menu-tag-label .tag-icon {
+        width: 16px !important;
+        height: 16px !important;
+        margin-bottom: 0 !important;
+    }
+    .my-swiper, #target-map {
+        height: 200px !important;
+    }
+    .action-btn {
+        padding: 0 20px;
+        height: 44px;
+        font-size: 0.9em;
+    }
+}
+/* --- ここから修正開始 --- */
+
+/* 1. タグボタン内のアイコン（黒→灰色に） */
+.tag-icon {
+    /* 灰色(invert 0.5)にし、白の影を落として背景写真の上でも見えるようにする */
+    filter: brightness(0) invert(0.5) drop-shadow(0 0 2px rgba(148, 90, 90, 0.8)) !important;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 12px;
+}
+
+/* 2. カード内の文字をくっきりさせる（影を強化） */
+.tag-btn span, .menu-btn span {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9) !important;
+    font-weight: 900 !important;
+}
+
+/* 3. カード背景を少し暗くして、アイコンと文字を引き立たせる */
+.tag-btn, .menu-btn {
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --- ここまで修正終了 --- */
