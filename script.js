@@ -693,3 +693,42 @@ function createBubbles(cat) {
         container.appendChild(bubble);
     }
 }
+const bgImages = [
+    'images/haikei.koube1.jpg',
+    'images/haikei.koube2.jpg',
+    'images/haikei.koube3.jpg',
+    'images/haikei.koube4.jpg',
+    'images/haikei.koube5.jpg'
+];
+
+function initBackground() {
+    const slideshowContainer = document.getElementById('bg-slideshow');
+    if (!slideshowContainer) return;
+
+    bgImages.forEach((src, index) => {
+        const div = document.createElement('div');
+        div.className = 'bg-slide';
+        div.style.backgroundImage = `url('${src}')`;
+        if (index === 0) div.classList.add('active');
+        slideshowContainer.appendChild(div);
+    });
+
+    const slides = document.querySelectorAll('.bg-slide');
+    let currentIndex = 0;
+
+    setInterval(() => {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        setTimeout(() => {
+            slides[currentIndex].classList.add('active');
+        }, 50);
+    }, 8000);
+
+    document.addEventListener('mousemove', (e) => {
+        const x = (window.innerWidth / 2 - e.pageX) / 50;
+        const y = (window.innerHeight / 2 - e.pageY) / 50;
+        slideshowContainer.style.transform = `translate(${x}px, ${y}px)`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initBackground);
