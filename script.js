@@ -694,11 +694,11 @@ function createBubbles(cat) {
     }
 }
 const bgImages = [
-    'images/haikei.koube1.jpg',
-    'images/haikei.koube2.jpg',
-    'images/haikei.koube3.jpg',
-    'images/haikei.koube4.jpg',
-    'images/haikei.koube5.jpg'
+    'images/haiki/koube1.jpg',
+    'images/haiki/koube2.jpg',
+    'images/haiki/koube3.jpg',
+    'images/haiki/koube4.jpg',
+    'images/haiki/koube5.jpg'
 ];
 
 function initBackground() {
@@ -725,8 +725,8 @@ function initBackground() {
     }, 8000);
 
     document.addEventListener('mousemove', (e) => {
-        const x = (window.innerWidth / 2 - e.pageX) / 50;
-        const y = (window.innerHeight / 2 - e.pageY) / 50;
+        const x = (window.innerWidth / 2 - e.pageX) / 0;
+        const y = (window.innerHeight / 2 - e.pageY) / 0;
         slideshowContainer.style.transform = `translate(${x}px, ${y}px)`;
     });
 }

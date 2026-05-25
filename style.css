@@ -18,7 +18,7 @@ rt { visibility: hidden; }
 .show-ruby rt {
     visibility: visible;
     font-size: 0.6em;
-    color: #867d7d;
+    color: #b9aaaa;/*ふりがなの色*/
 }
 
 ruby {
@@ -28,7 +28,7 @@ ruby {
 
 #landing-wrapper {
     width: 100%;
-    background-color: #001f3f;
+    background-color: #000000;
     position: relative;
 }
 
@@ -38,7 +38,7 @@ ruby {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #001f3f;
+    background-color: #447fba;
     position: relative;
     overflow: hidden;
 }
@@ -170,7 +170,7 @@ ruby {
     margin: 0 0 24px 0;
     font-weight: 900;
     line-height: 1.4;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
 }
 
 .lp-text p {
@@ -201,29 +201,39 @@ ruby {
 .lp-image:hover img {
     transform: scale(1.05);
 }
+/* ↓ボタンを元の色に戻して、下の余白を作ります */
+.start-btn {
+    margin-top: 20px;
+    margin-bottom: 90px; /* ここで「↓」との距離を調整します */
+}
 
+/* ↓真ん中キープ＆フワフワ動くアニメーション */
 .scroll-indicator {
     position: absolute;
-    bottom: 30px;
-    left: 0;           /* left: 50% を left: 0 に変更 */
-    right: 0;          /* right: 0 を追加 */
-    margin: 0 auto;    /* これで左右中央に固定されます */
-    width: fit-content;/* 文字幅に合わせる */
+    bottom: 20px;
+    left: 46%;
+    animation: bounce-arrow 2s infinite ease-in-out;
     text-align: center;
-    color: #ffffff;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    animation: bounce 2s infinite;
     z-index: 10;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-}
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-    40% { transform: translate(-50%, -15px); }
-    60% { transform: translate(-50%, -7px); }
+    color: #ffffff;
+    text-shadow: rgba(255, 0, 0, 0.8);
+    cursor: pointer;
 }
 
+@keyframes bounce-arrow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+.start-btn {
+
+    margin-top: 1px;
+    margin-bottom: 70px;
+}
 .fade-in-up {
     opacity: 0;
     transform: translateY(60px);
@@ -264,7 +274,7 @@ header {
     min-width: 82px;
     background: #ffffff;
     border: 2px solid #dddddd;
-    color: #555555;
+    color: #5fa781;     /* 設定とかの色 */
     border-radius: 24px;
     font-size: 15px;
     font-weight: bold;
@@ -319,13 +329,13 @@ header {
 .prompt-title {
     font-size: 2.2em;
     font-weight: 900;
-    color: #001f3f;
+    color: #ffffff;/*はじめての方へのタイトルのやつ*/
     margin-bottom: 15px;
 }
 
 .prompt-sub {
     font-size: 1.2em;
-    color: #555555;
+    color: #a7b5b9;/*はじめての方へのサブタイトルのやつ*/
     margin-bottom: 50px;
     font-weight: bold;
 }
@@ -352,7 +362,7 @@ header {
 
 .no-btn {
     background-color: #ffffff;
-    color: #001f3f;
+    color: #001f3f;/*いいえのやつ*/
     border: 2px solid #dddddd;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
@@ -366,7 +376,7 @@ header {
 .tutorial-title {
     font-size: 2em;
     font-weight: 900;
-    color: #001f3f;
+    color: #ffffff;/*チュートリアルのタイトル*/
     margin-bottom: 24px;
 }
 
@@ -383,7 +393,7 @@ header {
 .tutorial-text {
     font-size: 1.125em;
     line-height: 2.0;
-    color: #444444;
+    color: #000000;
     text-align: left;
     max-width: 750px;
     margin: 0 auto 40px auto;
@@ -479,7 +489,7 @@ header {
     padding: 8px 16px;
     font-size: 1em;
     background: transparent;
-    color: #555555;
+    color: #22a699;/*クリアボタン*/
     border: none;
     text-decoration: underline;
     cursor: pointer;
@@ -489,7 +499,7 @@ header {
 
 #tag-submit-btn:disabled {
     background: #e2e8f0 !important;
-    color: #94a3b8 !important;
+    color: #000000 !important;/*早速体験のやつ*/
     box-shadow: none !important;
     cursor: not-allowed;
     transform: none !important;
@@ -523,7 +533,7 @@ header {
     font-size: 0.7em; 
     margin-bottom: 12px;
     background: rgba(255, 255, 255, 0.95);
-    color: #001f3f;
+    color:#4e7cb9;/*タグの色*/
     padding: 8px 18px;
     border-radius: 30px;
     text-shadow: none;
@@ -544,7 +554,7 @@ header {
 .sortable-ghost { 
     opacity: 0.2;
     transform: scale(0.95);
-    background-color: #e2e8f0;
+    background-color: #e2e8f0;/*ドラッグ中の元の位置のやつ*/
 }
 
 .sortable-fallback {
@@ -584,7 +594,7 @@ header {
 .detail-dot {
     width: 12px;
     height: 12px;
-    background-color: #cbd5e1;
+    background-color: #ffffff;
     border-radius: 50%;
     cursor: pointer;
     transition: 0.3s;
@@ -599,7 +609,7 @@ header {
     font-size: 28px;
     margin: 0 0 24px 0;
     line-height: 1.8;
-    color: #001f3f;
+     color: #ffffff;/*タグ選択後のタイトル*/
     font-weight: 900;
 }
 
@@ -609,7 +619,7 @@ header {
     margin: 0 auto 24px auto;
     padding: 0 16px;
     line-height: 1.8;
-    color: #444444;
+    color: #ebffe6;
 }
 
 iframe {
@@ -628,7 +638,7 @@ iframe {
     height: 54px;
     font-size: 16px;
     background-color: #ffffff;
-    color: #001f3f;
+    color: #010101;/*ボタン*/
     border-radius: 30px;
     border: 2px solid #dddddd;
     cursor: pointer;
@@ -641,7 +651,7 @@ iframe {
 
 .action-btn:hover {
     background-color: #f8fafc;
-    border-color: #cccccc;
+    border-color: #878585;
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
@@ -786,10 +796,11 @@ iframe {
         margin-bottom: 30px;
         letter-spacing: 0.2em;
     }
-    .start-btn, #tag-submit-btn, .tutorial-finish-btn, .yes-btn {
-        padding: 12px 30px;
-        font-size: 1rem;
-    }
+.start-btn {
+    background-color: red !important;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
     .scroll-indicator {
         bottom: 15px;
     }
@@ -913,4 +924,25 @@ html, body {
 
 [id*="screen"], [id*="container"], [id*="prompt"], [id*="modal"], [id*="wrapper"] {
     background-color: transparent !important;
+}
+.top-logo {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    display: block;
+    margin: 30 auto 40px auto;
+}
+#tag-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 850px;
+    margin: 20px auto;
+}
+
+#tag-buttons-container > * {
+    width: 250px !important;
+    height: 140px !important;
+    box-sizing: border-box;
 }
