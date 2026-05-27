@@ -211,24 +211,23 @@ ruby {
 .scroll-indicator {
     position: absolute;
     bottom: 20px;
-    left: 46%;
+    left: 50%;
+    transform: translateX(-50%);
     animation: bounce-arrow 2s infinite ease-in-out;
     text-align: center;
     z-index: 10;
     color: #ffffff;
-    text-shadow: rgba(255, 0, 0, 0.8);
     cursor: pointer;
 }
 
 @keyframes bounce-arrow {
     0%, 100% {
-        transform: translateY(0);
+        transform: translate(-50%, 0);
     }
     50% {
-        transform: translateY(10px);
+        transform: translate(-50%, 10px);
     }
 }
-
 .start-btn {
 
     margin-top: 1px;
@@ -762,88 +761,120 @@ iframe {
 @media (max-width: 600px) {
     header {
         height: auto;
-        padding: 10px;
-        min-height: 60px;
+        padding: 8px;
+        min-height: 50px;
     }
+    
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+        padding-right: 35px;
+    }
+    
     .top-controls-btn {
-        padding: 6px 10px;
+        padding: 4px 6px;
         min-width: auto;
-        font-size: 12px;
+        font-size: 11px;
         margin: 0;
     }
+    
+    .settings-container {
+        position: absolute !important;
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+
     .item1 {
-        width: 55vw; height: 55vw;
-        top: -5%; left: -10%;
-    }
-    .item2 {
         width: 45vw; height: 45vw;
-        bottom: 5%; right: -10%;
+        top: 0; left: 0;
     }
-    .item3 {
-        width: 35vw; height: 35vw;
-        top: 15%; right: -5%;
-    }
-    .item4 {
+    
+    .item2 {
         width: 40vw; height: 40vw;
-        bottom: 15%; left: -5%;
+        bottom: 5%; right: -5%;
     }
+    
+    .item3 {
+        width: 30vw; height: 30vw;
+        top: 20%; right: 0;
+    }
+    
+    .item4 {
+        width: 35vw; height: 35vw;
+        bottom: 20%; left: 0;
+    }
+
     .welcome-title {
         font-size: 2.5rem;
         margin-top: 20px;
     }
+    
     .welcome-sub {
         font-size: 0.9rem;
         margin-bottom: 30px;
         letter-spacing: 0.2em;
     }
-.start-btn {
-    background-color: red !important;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-    .scroll-indicator {
-        bottom: 15px;
+    
+    .start-btn {
+        background-color: red !important;
+        margin-top: 20px;
+        margin-bottom: 30px;
     }
+
     .prompt-title, #content-title, #tag-title, #fav-title {
         font-size: 1.5em !important;
     }
+    
     .prompt-sub {
         font-size: 1em;
     }
-    #tag-buttons-container, #favorite-grid {
-        gap: 10px !important;
+
+    #tag-buttons-container {
+        gap: 8px !important;
     }
-    .tag-btn {
-        flex: 0 1 calc(50% - 10px) !important;
-        height: 120px !important;
-        padding: 8px !important;
+    
+    #tag-buttons-container > * {
+        width: calc(33.333% - 8px) !important;
+        height: 95px !important;
+        padding: 4px !important;
     }
+    
     .tag-btn span {
-        font-size: 0.85em !important;
+        font-size: 0.65em !important;
     }
+    
     .tag-icon {
-        width: 28px !important;
-        height: 28px !important;
-        margin-bottom: 8px !important;
+        width: 22px !important;
+        height: 22px !important;
+        margin-bottom: 2px !important;
     }
+
     .menu-btn {
         height: 140px;
         font-size: 1em;
         padding: 10px;
     }
+    
     .menu-tag-label {
         font-size: 0.6em;
         padding: 5px 10px;
         margin-bottom: 8px;
     }
+    
     .menu-tag-label .tag-icon {
         width: 16px !important;
         height: 16px !important;
         margin-bottom: 0 !important;
     }
+    
     .my-swiper, #target-map {
         height: 200px !important;
     }
+    
     .action-btn {
         padding: 0 20px;
         height: 44px;
