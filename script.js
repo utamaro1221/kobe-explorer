@@ -292,16 +292,14 @@ function updateTextLanguage() {
     const lpText2 = document.getElementById('lp-text2');
     if (lpText2) lpText2.innerHTML = currentLang === 'en' ? uiTranslations.lpText2.e : formatText(uiTranslations.lpText2.j);
 
-    if (document.getElementById('tag-screen').style.display !== 'none') {
-        renderTagButtons();
+    renderTagButtons();
+    renderFavoriteGrid();
+
+    if (currentMenuItems.length > 0) {
+        updateMenuItemsLanguage();
     }
-    if (document.getElementById('favorite-screen').style.display !== 'none') {
-        showFavoriteScreen();
-    }
-    if (document.getElementById('menu-screen').style.display !== 'none') {
-        if (currentMenuItems.length > 0) renderMenu(currentMenuItems);
-    }
-    if (document.getElementById('detail-screen').style.display !== 'none' && currentDetailItem) {
+
+    if (currentDetailItem) {
         document.getElementById('content-title').innerHTML = currentLang === 'en' ? currentDetailItem.enName : formatText(currentDetailItem.nameHtml);
         document.getElementById('content-text').innerHTML = currentLang === 'en' ? currentDetailItem.enDesc : formatText(currentDetailItem.descHtml);
         
@@ -396,8 +394,12 @@ function processTags() {
 function showFavoriteScreen() {
     document.getElementById('tag-screen').style.display = 'none';
     document.getElementById('favorite-screen').style.display = 'flex';
-    
+    renderFavoriteGrid();
+}
+
+function renderFavoriteGrid() {
     const favGrid = document.getElementById('favorite-grid');
+    if (!favGrid) return;
     favGrid.innerHTML = '';
     
     selectedTags.forEach(tag => {
@@ -413,6 +415,20 @@ function showFavoriteScreen() {
         btn.innerHTML = getTagLabel(tag);
         btn.onclick = () => generateMenu(selectedTags, tag);
         favGrid.appendChild(btn);
+    });
+}
+
+function updateMenuItemsLanguage() {
+    const grid = document.getElementById('dynamic-menu-grid');
+    if (!grid) return;
+    
+    Array.from(grid.children).forEach(btn => {
+        const itemId = btn.id;
+        const item = currentMenuItems.find(i => i.id === itemId);
+        if (item) {
+            const labelText = currentLang === 'en' ? item.enName : formatText(item.nameHtml);
+            btn.innerHTML = `<div class="menu-tag-label">${getTagLabel(item.cat)}</div><span style="color:white; text-shadow: 2px 2px 6px rgba(0,0,0,0.9);">${labelText}</span>`;
+        }
     });
 }
 
