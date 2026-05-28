@@ -6,52 +6,52 @@
     <title>Kobe Explorer</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 <body id="body" class="font-normal">
     <div id="bg-slideshow"></div>
     <div id="bg-overlay"></div>
 
-   <header id="main-header" style="display: none;">
-    <div class="header-controls">
-        <div class="header-left">
-            <button id="header-back-btn" class="top-controls-btn" style="display: none;">← 戻る</button>
-            <button id="header-tag-btn" class="top-controls-btn" onclick="goToTagSelection()">タグ選択</button>
+    <header id="main-header" style="display: none;">
+        <div class="header-controls">
+            <div class="header-left">
+                <button id="header-back-btn" class="top-controls-btn" style="display: none;">← 戻る</button>
+                <button id="header-tag-btn" class="top-controls-btn" onclick="goToTagSelection()">タグ選択</button>
+            </div>
+
+            <div class="header-right">
+                <div class="dropdown-container">
+                    <button id="lang-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('lang-menu')">言語/翻訳 ▼</button>
+                    <div id="lang-menu" class="dropdown-menu">
+                        <button onclick="setLang('en'); toggleDropdown('lang-menu')">English</button>
+                        <button onclick="setLang('ja-kanji'); toggleDropdown('lang-menu')">漢字</button>
+                        <button onclick="handleHiraClick(); toggleDropdown('lang-menu')">ひらがな</button>
+                    </div>
+                </div>
+
+                <div class="dropdown-container">
+                    <button id="size-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('size-menu')">大きさ ▼</button>
+                    <div id="size-menu" class="dropdown-menu">
+                        <button onclick="changeFontSize('normal'); toggleDropdown('size-menu')">標準</button>
+                        <button onclick="changeFontSize('large'); toggleDropdown('size-menu')">大</button>
+                        <button onclick="changeFontSize('xlarge'); toggleDropdown('size-menu')">特大</button>
+                    </div>
+                </div>
+
+                <div class="dropdown-container settings-container">
+                    <button id="settings-toggle" class="top-controls-btn settings-toggle-btn" onclick="toggleDropdown('settings-menu')">
+                        <img src="images/aikonn/gear.png" alt="" class="settings-icon">
+                    </button>
+                    <div id="settings-menu" class="dropdown-menu">
+                        <button id="settings-title-btn" onclick="goToTitle()"></button>
+                        <button id="settings-tutorial-btn" onclick="goToTutorialScreen()"></button>
+                        <button id="settings-tag-btn" onclick="goToTagSelection()"></button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="header-right">
-            <div class="dropdown-container">
-                <button id="lang-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('lang-menu')">言語/翻訳 ▼</button>
-                <div id="lang-menu" class="dropdown-menu">
-                    <button onclick="setLang('en'); toggleDropdown('lang-menu')">English</button>
-                    <button onclick="setLang('ja-kanji'); toggleDropdown('lang-menu')">漢字</button>
-                    <button onclick="handleHiraClick(); toggleDropdown('lang-menu')">ひらがな</button>
-                </div>
-            </div>
-
-            <div class="dropdown-container">
-                <button id="size-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('size-menu')">大きさ ▼</button>
-                <div id="size-menu" class="dropdown-menu">
-                    <button onclick="changeFontSize('normal'); toggleDropdown('size-menu')">標準</button>
-                    <button onclick="changeFontSize('large'); toggleDropdown('size-menu')">大</button>
-                    <button onclick="changeFontSize('xlarge'); toggleDropdown('size-menu')">特大</button>
-                </div>
-            </div>
-
-            <div class="dropdown-container settings-container">
-                <button id="settings-toggle" class="top-controls-btn settings-toggle-btn" onclick="toggleDropdown('settings-menu')">
-                    <img src="images/aikonn/gear.png" alt="" class="settings-icon">
-                </button>
-                <div id="settings-menu" class="dropdown-menu">
-                    <button id="settings-title-btn" onclick="goToTitle()"></button>
-                    <button id="settings-tutorial-btn" onclick="goToTutorialScreen()"></button>
-                    <button id="settings-tag-btn" onclick="goToTagSelection()"></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    </header>
 
     <div id="landing-wrapper">
         <div id="welcome-screen">
@@ -62,7 +62,7 @@
                 <div class="float-item item4"></div>
             </div>
             <div class="welcome-content">
-           <img src="images/aikonn/taitoru.png" class="top-logo" alt="Kobe Explorer">
+                <img src="images/aikonn/taitoru.png" class="top-logo" alt="Kobe Explorer">
                 <button class="start-btn" onclick="startExplorer()">START</button>
             </div>
             <div class="scroll-indicator fade-in-up" onclick="scrollToLp()">
@@ -139,13 +139,12 @@
             </div>
         </div>
 
-       <div id="menu-screen" style="display: none;">
+        <div id="menu-screen" style="display: none;">
             <div style="width: 100%; text-align: center;">
                 <div id="dynamic-menu-grid"></div>
             </div>
         </div>
 
-        <div id="detail-screen" style="display: none; text-align: center;">
         <div id="detail-screen" style="display: none; text-align: center;">
             <h2 id="content-title"></h2>
 
@@ -162,7 +161,6 @@
             
             <div id="link-box" style="display: none; margin-bottom: 25px;">
                 <div id="site-links" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;"></div>
-            </div>
             </div>
         </div>
     </div>
