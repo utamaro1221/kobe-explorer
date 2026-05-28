@@ -316,7 +316,17 @@ function updateTextLanguage() {
 
     document.body.classList.toggle('show-ruby', currentLang === 'ja-hira' && hiraState === 1);
 }
-
+const hBackBtn = document.getElementById('header-back-btn');
+    if (hBackBtn) hBackBtn.innerHTML = currentLang === 'en' ? "← Back" : "← 戻る";
+    
+    const hTagBtn = document.getElementById('header-tag-btn');
+    if (hTagBtn) hTagBtn.innerHTML = currentLang === 'en' ? "Tags" : "タグ選択";
+    
+    const hLangBtn = document.getElementById('lang-toggle-btn');
+    if (hLangBtn) hLangBtn.innerHTML = currentLang === 'en' ? "Language ▼" : "言語/翻訳 ▼";
+    
+    const hSizeBtn = document.getElementById('size-toggle-btn');
+    if (hSizeBtn) hSizeBtn.innerHTML = currentLang === 'en' ? "Size ▼" : "大きさ ▼";
 function convertKatakanaToHiragana(text) {
     return text.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 }
@@ -748,3 +758,48 @@ function initBackground() {
 }
 
 document.addEventListener('DOMContentLoaded', initBackground);
+function toggleDropdown(id) {
+    const menu = document.getElementById(id);
+    const isVisible = menu.style.display === 'flex';
+    
+    document.querySelectorAll('.dropdown-menu').forEach(el => el.style.display = 'none');
+    
+    if (!isVisible) {
+        menu.style.display = 'flex';
+    }
+}
+
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.dropdown-container')) {
+        document.querySelectorAll('.dropdown-menu').forEach(el => el.style.display = 'none');
+    }
+});
+
+function updateHeaderBackBtn() {
+    const backBtn = document.getElementById('header-back-btn');
+    if (!backBtn) return;
+    
+    if (document.getElementById('detail-screen').style.display === 'flex') {
+        backBtn.style.display = 'block';
+        backBtn.onclick = hideDetail;
+    } else if (document.getElementById('menu-screen').style.display === 'flex') {
+        backBtn.style.display = 'block';
+        backBtn.onclick = goToTags;
+    } else if (document.getElementById('favorite-screen').style.display === 'flex') {
+        backBtn.style.display = 'block';
+        backBtn.onclick = goBackToTagsFromFav;
+    } else {
+        backBtn.style.display = 'none';
+    }
+}
+
+const screenObserver = new MutationObserver(() => {
+    updateHeaderBackBtn();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    ['tag-screen', 'favorite-screen', 'menu-screen', 'detail-screen'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) screenObserver.observe(el, { attributes: true, attributeFilter: ['style'] });
+    });
+});

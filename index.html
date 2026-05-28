@@ -13,28 +13,45 @@
     <div id="bg-slideshow"></div>
     <div id="bg-overlay"></div>
 
-    <header id="main-header" style="display: none;">
-        <div class="header-controls" style="display: flex; width: 100%; justify-content: center; align-items: center; position: relative;">
-            <div class="controls">
-                <button class="top-controls-btn" onclick="setLang('en')">English</button>
-                <button class="top-controls-btn" onclick="setLang('ja-kanji')">漢字</button>
-                <button class="top-controls-btn" onclick="handleHiraClick()">ひらがな</button>
-                <button class="top-controls-btn" onclick="changeFontSize('normal')">標準</button>
-                <button class="top-controls-btn" onclick="changeFontSize('large')">大</button>
-                <button class="top-controls-btn" onclick="changeFontSize('xlarge')">特大</button>
+   <header id="main-header" style="display: none;">
+    <div class="header-controls">
+        <div class="header-left">
+            <button id="header-back-btn" class="top-controls-btn" style="display: none;">← 戻る</button>
+            <button id="header-tag-btn" class="top-controls-btn" onclick="goToTagSelection()">タグ選択</button>
+        </div>
+
+        <div class="header-right">
+            <div class="dropdown-container">
+                <button id="lang-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('lang-menu')">言語/翻訳 ▼</button>
+                <div id="lang-menu" class="dropdown-menu">
+                    <button onclick="setLang('en'); toggleDropdown('lang-menu')">English</button>
+                    <button onclick="setLang('ja-kanji'); toggleDropdown('lang-menu')">漢字</button>
+                    <button onclick="handleHiraClick(); toggleDropdown('lang-menu')">ひらがな</button>
+                </div>
             </div>
-            <div class="settings-container" style="position: absolute; right: 20px;">
-                <button id="settings-toggle" class="top-controls-btn settings-toggle-btn" onclick="toggleSettingsMenu()">
+
+            <div class="dropdown-container">
+                <button id="size-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('size-menu')">大きさ ▼</button>
+                <div id="size-menu" class="dropdown-menu">
+                    <button onclick="changeFontSize('normal'); toggleDropdown('size-menu')">標準</button>
+                    <button onclick="changeFontSize('large'); toggleDropdown('size-menu')">大</button>
+                    <button onclick="changeFontSize('xlarge'); toggleDropdown('size-menu')">特大</button>
+                </div>
+            </div>
+
+            <div class="dropdown-container settings-container">
+                <button id="settings-toggle" class="top-controls-btn settings-toggle-btn" onclick="toggleDropdown('settings-menu')">
                     <img src="images/aikonn/gear.png" alt="" class="settings-icon">
                 </button>
-                <div id="settings-menu" class="settings-menu" style="display: none; position: absolute; top: calc(100% + 10px); right: 0; background: white; border: 2px solid #ddd; border-radius: 12px; padding: 10px; z-index: 10001; min-width: 200px;">
-                    <button id="settings-title-btn" class="settings-menu-btn" style="width: 100%; border: none; background: transparent; padding: 10px; text-align: left; cursor: pointer; font-weight: bold; border-bottom: 1px solid #eee;" onclick="goToTitle()"></button>
-                    <button id="settings-tutorial-btn" class="settings-menu-btn" style="width: 100%; border: none; background: transparent; padding: 10px; text-align: left; cursor: pointer; font-weight: bold; border-bottom: 1px solid #eee;" onclick="goToTutorialScreen()"></button>
-                    <button id="settings-tag-btn" class="settings-menu-btn" style="width: 100%; border: none; background: transparent; padding: 10px; text-align: left; cursor: pointer; font-weight: bold;" onclick="goToTagSelection()"></button>
+                <div id="settings-menu" class="dropdown-menu">
+                    <button id="settings-title-btn" onclick="goToTitle()"></button>
+                    <button id="settings-tutorial-btn" onclick="goToTutorialScreen()"></button>
+                    <button id="settings-tag-btn" onclick="goToTagSelection()"></button>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <div id="landing-wrapper">
         <div id="welcome-screen">
