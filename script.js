@@ -262,11 +262,18 @@ function updateTextLanguage() {
     
     document.getElementById('fav-title').innerHTML = currentLang === 'en' ? uiTranslations.favTitle.e : formatText(uiTranslations.favTitle.j);
     document.getElementById('fav-subtitle').innerHTML = currentLang === 'en' ? uiTranslations.favSub.e : formatText(uiTranslations.favSub.j);
-    document.getElementById('reselect-tags-btn').innerHTML = currentLang === 'en' ? uiTranslations.reselectTags.e : formatText(uiTranslations.reselectTags.j);
+
+    const hBackBtn = document.getElementById('header-back-btn');
+    if (hBackBtn) hBackBtn.innerHTML = currentLang === 'en' ? "← Back" : "← 戻る";
     
-    document.getElementById('fav-back-btn').innerHTML = currentLang === 'en' ? uiTranslations.favBack.e : formatText(uiTranslations.favBack.j);
-    document.getElementById('detail-back-btn').innerHTML = currentLang === 'en' ? uiTranslations.detailBack.e : formatText(uiTranslations.detailBack.j);
-    document.getElementById('detail-tagback-btn').innerHTML = currentLang === 'en' ? uiTranslations.detailTagback.e : formatText(uiTranslations.detailTagback.j);
+    const hTagBtn = document.getElementById('header-tag-btn');
+    if (hTagBtn) hTagBtn.innerHTML = currentLang === 'en' ? "Tags" : "タグ選択";
+    
+    const hLangBtn = document.getElementById('lang-toggle-btn');
+    if (hLangBtn) hLangBtn.innerHTML = currentLang === 'en' ? "Language ▼" : "言語/翻訳 ▼";
+    
+    const hSizeBtn = document.getElementById('size-toggle-btn');
+    if (hSizeBtn) hSizeBtn.innerHTML = currentLang === 'en' ? "Size ▼" : "大きさ ▼";
     
     const settingsTitleBtn = document.getElementById('settings-title-btn');
     const settingsTutorialBtn = document.getElementById('settings-tutorial-btn');
@@ -292,14 +299,14 @@ function updateTextLanguage() {
     const lpText2 = document.getElementById('lp-text2');
     if (lpText2) lpText2.innerHTML = currentLang === 'en' ? uiTranslations.lpText2.e : formatText(uiTranslations.lpText2.j);
 
-    renderTagButtons();
-    renderFavoriteGrid();
+    if (typeof renderTagButtons === 'function') renderTagButtons();
+    if (typeof renderFavoriteGrid === 'function') renderFavoriteGrid();
 
-    if (currentMenuItems.length > 0) {
-        updateMenuItemsLanguage();
+    if (typeof currentMenuItems !== 'undefined' && currentMenuItems.length > 0) {
+        if (typeof updateMenuItemsLanguage === 'function') updateMenuItemsLanguage();
     }
 
-    if (currentDetailItem) {
+    if (typeof currentDetailItem !== 'undefined' && currentDetailItem) {
         document.getElementById('content-title').innerHTML = currentLang === 'en' ? currentDetailItem.enName : formatText(currentDetailItem.nameHtml);
         document.getElementById('content-text').innerHTML = currentLang === 'en' ? currentDetailItem.enDesc : formatText(currentDetailItem.descHtml);
         
@@ -315,6 +322,41 @@ function updateTextLanguage() {
     }
 
     document.body.classList.toggle('show-ruby', currentLang === 'ja-hira' && hiraState === 1);
+}
+
+function renderFavoriteGrid() {
+    const favGrid = document.getElementById('favorite-grid');
+    if (!favGrid) return;
+    favGrid.innerHTML = '';
+    
+    selectedTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'tag-btn';
+        
+        let bgImg = '';
+        if (db[tag] && db[tag][0] && db[tag][0].images[0]) {
+            bgImg = `images/${db[tag][0].images[0]}`;
+        }
+        btn.style.backgroundImage = `linear-gradient(rgba(0,31,63,0.65), rgba(0,31,63,0.85)), url('${bgImg}')`;
+        
+        btn.innerHTML = getTagLabel(tag);
+        btn.onclick = () => generateMenu(selectedTags, tag);
+        favGrid.appendChild(btn);
+    });
+}
+
+function updateMenuItemsLanguage() {
+    const grid = document.getElementById('dynamic-menu-grid');
+    if (!grid) return;
+    
+    Array.from(grid.children).forEach(btn => {
+        const itemId = btn.id;
+        const item = currentMenuItems.find(i => i.id === itemId);
+        if (item) {
+            const labelText = currentLang === 'en' ? item.enName : formatText(item.nameHtml);
+            btn.innerHTML = `<div class="menu-tag-label">${getTagLabel(item.cat)}</div><span style="color:white; text-shadow: 2px 2px 6px rgba(0,0,0,0.9);">${labelText}</span>`;
+        }
+    });
 }
 const hBackBtn = document.getElementById('header-back-btn');
     if (hBackBtn) hBackBtn.innerHTML = currentLang === 'en' ? "← Back" : "← 戻る";
