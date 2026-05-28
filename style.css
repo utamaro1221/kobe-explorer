@@ -999,31 +999,32 @@ html, body {
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 12px);
-    right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    top: calc(100% + 10px);
+    right: 50%;
+    transform: translateX(50%);
+    background: rgba(255, 255, 255, 0.98);
     border: 2px solid #dddddd;
     border-radius: 12px;
     padding: 8px;
-    min-width: 140px;
+    min-width: 160px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     flex-direction: column;
     gap: 4px;
     z-index: 10001;
-    backdrop-filter: blur(10px);
 }
 
 .dropdown-menu button {
     background: transparent;
     border: none;
     padding: 12px;
-    text-align: left;
+    text-align: center;
     font-size: 15px;
     font-weight: bold;
     color: #001f3f;
     cursor: pointer;
     border-radius: 8px;
     transition: 0.2s;
+    width: 100%;
 }
 
 .dropdown-menu button:hover {
