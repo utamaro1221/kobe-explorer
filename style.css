@@ -988,6 +988,9 @@ html, body {
     gap: 8px;
     align-items: center;
 }
+.header-right {
+    margin-left: auto;
+}
 
 .dropdown-container {
     position: relative;
