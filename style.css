@@ -708,9 +708,6 @@ iframe {
 }
 
 @media (max-width: 768px) {
-    .header-controls {
-        flex-direction: row;
-    }
     .controls {
         display: flex;
         flex-wrap: wrap;
