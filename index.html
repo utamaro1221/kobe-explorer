@@ -13,13 +13,15 @@
     <div id="bg-slideshow"></div>
     <div id="bg-overlay"></div>
 
-    <header id="main-header" style="display: none;">
-        <div class="header-controls">
-            <div class="header-left">
+    <header id="main-header" style="display: none; width: 100%;">
+        <div class="header-controls" style="display: flex; width: 100%; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto;">
+            
+            <div class="header-left" style="display: flex; gap: 15px;">
                 <button id="header-back-btn" class="top-controls-btn" style="display: none;">← 戻る</button>
-<button id="header-tag-btn" class="top-controls-btn" style="display: none;" onclick="goToTagSelection()">タグ選択</button>
+                <button id="header-tag-btn" class="top-controls-btn" style="display: none;" onclick="goToTagSelection()">タグ選択</button>
+            </div>
 
-            <div class="header-right">
+            <div class="header-right" style="margin-left: auto; display: flex; gap: 15px; align-items: center;">
                 <div class="dropdown-container">
                     <button id="lang-toggle-btn" class="top-controls-btn" onclick="toggleDropdown('lang-menu')">言語/翻訳 ▼</button>
                     <div id="lang-menu" class="dropdown-menu">
@@ -38,17 +40,18 @@
                     </div>
                 </div>
 
-                <div class="dropdown-container settings-container">
+                <div class="dropdown-container settings-container" style="position: relative;">
                     <button id="settings-toggle" class="top-controls-btn settings-toggle-btn" onclick="toggleDropdown('settings-menu')">
                         <img src="images/aikonn/gear.png" alt="" class="settings-icon">
                     </button>
-                    <div id="settings-menu" class="dropdown-menu">
+                    <div id="settings-menu" class="dropdown-menu" style="right: 0; transform: none;">
                         <button id="settings-title-btn" onclick="goToTitle()">タイトルに戻る</button>
                         <button id="settings-tutorial-btn" onclick="goToTutorialScreen()">使い方を見る</button>
                         <button id="settings-tag-btn" onclick="goToTagSelection()">タグ選択に戻る</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </header>
 
