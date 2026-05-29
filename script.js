@@ -816,19 +816,15 @@ document.addEventListener('click', (event) => {
         document.querySelectorAll('.dropdown-menu').forEach(el => el.style.display = 'none');
     }
 });
-
 function updateHeaderBackBtn() {
     const backBtn = document.getElementById('header-back-btn');
     const tagBtn = document.getElementById('header-tag-btn');
     if (!backBtn || !tagBtn) return;
     
-    // 現在の画面状態を取得
     const isDetailScreen = document.getElementById('detail-screen').style.display === 'flex' || document.getElementById('detail-screen').style.display === 'block';
     const isMenuScreen = document.getElementById('menu-screen').style.display === 'flex' || document.getElementById('menu-screen').style.display === 'block';
     const isFavScreen = document.getElementById('favorite-screen').style.display === 'flex' || document.getElementById('favorite-screen').style.display === 'block';
-    const isTagScreen = document.getElementById('tag-screen').style.display === 'flex' || document.getElementById('tag-screen').style.display === 'block';
 
-    // 「戻る」ボタンの表示制御
     if (isDetailScreen) {
         backBtn.style.display = 'block';
         backBtn.onclick = hideDetail;
@@ -842,15 +838,12 @@ function updateHeaderBackBtn() {
         backBtn.style.display = 'none';
     }
 
-    // 「タグ選択」ボタンの表示制御
-    if (isDetailScreen || isMenuScreen || isFavScreen || isTagScreen) {
+    if (isDetailScreen || isMenuScreen || isFavScreen) {
         tagBtn.style.display = 'block';
     } else {
-        // スタート画面やLP画面では隠す
         tagBtn.style.display = 'none';
     }
 }
-
 const screenObserver = new MutationObserver(() => {
     updateHeaderBackBtn();
 });
