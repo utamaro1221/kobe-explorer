@@ -379,7 +379,7 @@ function formatText(html) {
         return html.replace(/<ruby>(.*?)<rt>.*?<\/rt><\/ruby>/g, "$1");
     } else if (currentLang === 'ja-hira') {
         if (hiraState === 1) {
-            return convertKatakanaToHiragana(html);
+            return html;
         } else if (hiraState === 2) {
             const hiraText = html.replace(/<ruby>.*?<rt>(.*?)<\/rt><\/ruby>/g, "$1");
             return convertKatakanaToHiragana(hiraText);
