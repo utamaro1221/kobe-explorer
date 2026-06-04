@@ -369,22 +369,30 @@ const hBackBtn = document.getElementById('header-back-btn');
     
     const hSizeBtn = document.getElementById('size-toggle-btn');
     if (hSizeBtn) hSizeBtn.innerHTML = currentLang === 'en' ? "Size ▼" : "大きさ ▼";
-function convertKatakanaToHiragana(text) {
-    return text.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+function convertKatakanaToHiragana(src) {
+    if (!src || typeof src !== 'string') return src;
+    return src.replace(/[\u30A1-\u30F6]/g, function(match) {
+        return String.fromCharCode(match.charCodeAt(0) - 0x60);
+    });
 }
 
 function formatText(html) {
     if (!html) return '';
-    if (currentLang === 'ja-kanji') {
-        return html.replace(/<ruby>(.*?)<rt>.*?<\/rt><\/ruby>/g, "$1");
-    } else if (currentLang === 'ja-hira') {
-        if (hiraState === 1) {
-            return html;
-        } else if (hiraState === 2) {
-            const hiraText = html.replace(/<ruby>.*?<rt>(.*?)<\/rt><\/ruby>/g, "$1");
-            return convertKatakanaToHiragana(hiraText);
+    if (typeof html !== 'string') html = String(html);
+
+    try {
+        if (currentLang === 'ja-kanji') {
+            return html.replace(/<ruby>([\s\S]*?)<rt>[\s\S]*?<\/rt><\/ruby>/g, "$1");
+        } else if (currentLang === 'ja-hira') {
+            if (hiraState === 1) {
+                return html;
+            } else if (hiraState === 2) {
+                let hiraText = html.replace(/<ruby>[\s\S]*?<rt>([\s\S]*?)<\/rt><\/ruby>/g, "$1");
+                return convertKatakanaToHiragana(hiraText);
+            }
         }
-    }
+    } catch (e) {}
+    
     return html;
 }
 
