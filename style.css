@@ -204,7 +204,7 @@ ruby {
 /* ↓ボタンを元の色に戻して、下の余白を作ります */
 .start-btn {
     margin-top: 20px;
-    margin-bottom: 90px; /* ここで「↓」との距離を調整します */
+    margin-bottom: 120px; /* 「↓」との距離を少し広げてボタンを上に移動 */
 }
 
 /* ↓真ん中キープ＆フワフワ動くアニメーション */
@@ -231,7 +231,7 @@ ruby {
 .start-btn {
 
     margin-top: 1px;
-    margin-bottom: 70px;
+    margin-bottom: 120px; /* 一貫して余白を増やす */
 }
 .fade-in-up {
     opacity: 0;
