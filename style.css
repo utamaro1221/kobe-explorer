@@ -232,6 +232,9 @@ ruby {
 
     margin-top: 1px;
     margin-bottom: 120px; /* 一貫して余白を増やす */
+    position: relative; /* 上に移動させるための調整 */
+    top: -40px; /* ボタンをさらに上に移動 */
+    z-index: 20; /* 背景と重ならないよう前面に出す */
 }
 .fade-in-up {
     opacity: 0;
